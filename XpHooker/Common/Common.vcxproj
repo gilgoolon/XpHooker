@@ -141,6 +141,7 @@
     <ClCompile Include="ErrorCode.cpp" />
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="File.cpp" />
+    <ClCompile Include="PicComponent.cpp" />
     <ClCompile Include="Process.cpp" />
     <ClCompile Include="ProcessEnumerator.cpp" />
     <ClCompile Include="RemoteMemory.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Include\File.hpp" />
     <ClInclude Include="Include\Formatting.hpp" />
     <ClInclude Include="Include\IRunner.hpp" />
+    <ClInclude Include="Include\PicComponent.hpp" />
     <ClInclude Include="Include\Process.hpp" />
     <ClInclude Include="Include\ProcessEnumerator.hpp" />
     <ClInclude Include="Include\RemoteMemory.hpp" />

@@ -1,11 +1,10 @@
 ﻿#pragma once
-#include "Exception.hpp"
+#include "PicComponent.hpp"
 
 #include <filesystem>
-#include <functional>
 #include <Windows.h>
 
-class DynamicLibrary final
+class DynamicLibrary final : std::enable_shared_from_this<DynamicLibrary>
 {
 public:
 	explicit DynamicLibrary(const std::filesystem::path& dll_path);
@@ -18,19 +17,20 @@ public:
 private:
 	[[nodiscard]] static HMODULE load_library(const std::filesystem::path& dll_path);
 
+	[[nodiscard]] void* get_exported_procedure(const std::string& name) const;
+
 public:
 	template <typename FunctionType, typename... Args>
 	auto call(const std::string& name, Args&&... args) const
 	{
-		const FARPROC result = GetProcAddress(m_module, name.c_str());
-		if (result == nullptr)
-		{
-			throw WinApiException(ErrorCode::FAILED_LIBRARY_GET_PROC_ADDRESS);
-		}
-		auto func = reinterpret_cast<FunctionType>(result);
+		auto func = reinterpret_cast<FunctionType>(get_exported_procedure(name));
 		return (*func)(std::forward<Args>(args)...);
 	}
 
+	[[nodiscard]] PicComponent::Ptr get_pic_component(const std::string& component_name);
+
 private:
 	HMODULE m_module;
+
+	friend PicComponent;
 };
