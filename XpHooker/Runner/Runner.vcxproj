@@ -140,7 +140,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Arguments.cpp" />
+    <ClCompile Include="HookedFunction.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="ProcessInjector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.vcxproj">
@@ -150,6 +152,8 @@
   <ItemGroup>
     <ClInclude Include="Arguments.hpp" />
     <ClInclude Include="Configuration.hpp" />
+    <ClInclude Include="HookedFunction.hpp" />
+    <ClInclude Include="ProcessHooker.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
