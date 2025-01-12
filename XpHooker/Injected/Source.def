@@ -2,4 +2,3 @@ LIBRARY Injected
 EXPORTS
 PIC__load_dll__START @1 NONAME;
 PIC__load_dll__END @2 NONAME;
-

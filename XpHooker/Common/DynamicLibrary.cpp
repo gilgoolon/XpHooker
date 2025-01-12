@@ -47,10 +47,10 @@ PicComponent::Ptr DynamicLibrary::get_pic_component(const std::string& component
 {
 	struct PublicPicComponent : PicComponent
 	{
-		PublicPicComponent(std::weak_ptr<DynamicLibrary> library, const std::string& component_name) :
-			PicComponent(std::move(library), component_name)
+		PublicPicComponent(const DynamicLibrary& library, const std::string& component_name) :
+			PicComponent(library, component_name)
 		{
 		}
 	};
-	return std::make_unique<PublicPicComponent>(weak_from_this(), component_name);
+	return std::make_unique<PublicPicComponent>(*this, component_name);
 }
