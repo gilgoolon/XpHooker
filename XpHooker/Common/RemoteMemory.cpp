@@ -60,3 +60,8 @@ void* RemoteMemory::allocate_remote_memory(Process& process, const uint32_t size
 	}
 	return result;
 }
+
+void* RemoteMemory::get() const
+{
+	return m_base_address;
+}

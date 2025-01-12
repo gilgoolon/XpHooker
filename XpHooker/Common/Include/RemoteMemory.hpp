@@ -24,4 +24,8 @@ private:
 	void* m_base_address;
 
 	[[nodiscard]] static void* allocate_remote_memory(Process& process, uint32_t size);
+
+	[[nodiscard]] void* get() const;
+
+	friend class HookedFunction;
 };
