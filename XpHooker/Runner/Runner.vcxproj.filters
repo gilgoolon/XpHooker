@@ -21,10 +21,10 @@
     <ClCompile Include="Arguments.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ProcessInjector.cpp">
+    <ClCompile Include="HookedFunction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HookedFunction.cpp">
+    <ClCompile Include="ProcessHooker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

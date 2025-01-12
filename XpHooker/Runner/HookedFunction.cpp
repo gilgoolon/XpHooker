@@ -2,9 +2,9 @@
 
 #include "Trace.hpp"
 
-HookedFunction::HookedFunction(std::weak_ptr<Process> process, void* new_function):
+HookedFunction::HookedFunction(std::weak_ptr<Process> process, const std::string& function_name, void* new_function):
 	m_process(std::move(process)),
-	m_previous_function(hook_function(*m_process.lock(), new_function))
+	m_previous_function(hook_function(*m_process.lock(), function_name, new_function))
 {
 }
 
@@ -12,7 +12,7 @@ HookedFunction::~HookedFunction()
 {
 	try
 	{
-		hook_function(*m_process.lock(), m_previous_function);
+		hook_function(*m_process.lock(), m_function_name, m_previous_function);
 	}
 	catch (...)
 	{
@@ -20,7 +20,7 @@ HookedFunction::~HookedFunction()
 	}
 }
 
-void* HookedFunction::hook_function(Process& process, void* new_function)
+void* HookedFunction::hook_function(Process& process, const std::string& function_name, void* new_function)
 {
 	return nullptr;
 }

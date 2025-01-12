@@ -142,7 +142,7 @@
     <ClCompile Include="Arguments.cpp" />
     <ClCompile Include="HookedFunction.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="ProcessInjector.cpp" />
+    <ClCompile Include="ProcessHooker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.vcxproj">
