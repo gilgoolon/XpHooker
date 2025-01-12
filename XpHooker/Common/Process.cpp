@@ -24,7 +24,7 @@ Process::Process(const std::wstring& command_line):
 
 HANDLE Process::open_process(const uint32_t pid)
 {
-	static constexpr DWORD READ_ACCESS = PROCESS_QUERY_INFORMATION | PROCESS_VM_READ | SYNCHRONIZE;
+	static constexpr DWORD READ_ACCESS = PROCESS_QUERY_INFORMATION | PROCESS_VM_READ | PROCESS_VM_WRITE | SYNCHRONIZE;
 	static constexpr BOOL DONT_INHERIT_HANDLE = FALSE;
 	const HANDLE result = OpenProcess(READ_ACCESS, DONT_INHERIT_HANDLE, pid);
 	if (result == nullptr)
