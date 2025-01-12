@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <cstdint>
 #include <memory>
+#include <vector>
 
 class RemoteMemory
 {
@@ -15,6 +16,8 @@ public:
 	RemoteMemory& operator=(const RemoteMemory&) = delete;
 	RemoteMemory(RemoteMemory&&) = delete;
 	RemoteMemory& operator=(RemoteMemory&&) = delete;
+
+	void write(const std::vector<uint8_t>& data);
 
 private:
 	std::weak_ptr<Process> m_process;

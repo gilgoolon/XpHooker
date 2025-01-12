@@ -27,6 +27,22 @@ RemoteMemory::~RemoteMemory()
 	}
 }
 
+void RemoteMemory::write(const std::vector<uint8_t>& data)
+{
+	DWORD bytes_written = 0;
+	const BOOL result = WriteProcessMemory(
+		m_process.lock().get(),
+		m_base_address,
+		data.data(),
+		data.size(),
+		&bytes_written
+	);
+	if (result == FALSE || bytes_written != data.size())
+	{
+		throw WinApiException(ErrorCode::FAILED_REMOTE_MEMORY_WRITE);
+	}
+}
+
 void* RemoteMemory::allocate_remote_memory(Process& process, const uint32_t size)
 {
 	static constexpr LPVOID UNSPECIFIED_ADDRESS = nullptr;

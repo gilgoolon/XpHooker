@@ -29,6 +29,7 @@ enum class ErrorCode : uint8_t
 	FAILED_PROCESS_CREATE,
 	FAILED_PROCESS_TERMINATE,
 	FAILED_REMOTE_MEMORY_ALLOCATE,
+	FAILED_REMOTE_MEMORY_WRITE,
 };
 
 std::wostringstream& operator<<(std::wostringstream& output, ErrorCode code);

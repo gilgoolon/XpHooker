@@ -6,9 +6,14 @@ PicComponent::PicComponent(const DynamicLibrary& library, const std::string& com
 {
 }
 
-std::vector<uint8_t> PicComponent::get() const
+std::vector<uint8_t> PicComponent::data() const
 {
 	return m_data;
+}
+
+uint32_t PicComponent::size() const
+{
+	return m_data.size();
 }
 
 std::vector<uint8_t> PicComponent::get_pic_data(const DynamicLibrary& library, const std::string& component_name)

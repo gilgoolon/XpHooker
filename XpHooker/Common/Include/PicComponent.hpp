@@ -18,10 +18,11 @@ public:
 	PicComponent(PicComponent&&) = delete;
 	PicComponent& operator=(PicComponent&&) = delete;
 
+	[[nodiscard]] std::vector<uint8_t> data() const;
+	[[nodiscard]] uint32_t size() const;
+
 private:
 	std::vector<uint8_t> m_data;
-
-	[[nodiscard]] std::vector<uint8_t> get() const;
 
 	[[nodiscard]] static std::vector<uint8_t> get_pic_data(const DynamicLibrary& library,
 	                                                       const std::string& component_name);
