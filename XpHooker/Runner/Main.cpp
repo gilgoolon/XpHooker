@@ -1,11 +1,17 @@
 ﻿#include "Arguments.hpp"
+#include "DynamicLibrary.hpp"
 #include "Exception.hpp"
+#include "Process.hpp"
 #include "Trace.hpp"
+#include "WinApi.hpp"
 
 #include <Windows.h>
 
 static void main_logic(const Arguments::Parsed& args)
 {
+	Process process(L"notepad.exe");
+	WinApi::sleep(Time::Seconds(5));
+	process.terminate();
 	TRACE(L"finished successfully")
 }
 
