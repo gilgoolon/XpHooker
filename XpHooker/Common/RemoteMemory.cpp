@@ -1,0 +1,46 @@
+﻿#include "Include/RemoteMemory.hpp"
+
+#include "CriticalSection.hpp"
+#include "Exception.hpp"
+#include "Process.hpp"
+#include "Trace.hpp"
+
+RemoteMemory::RemoteMemory(std::weak_ptr<Process> process, const uint32_t size):
+	m_process(std::move(process)),
+	m_base_address(allocate_remote_memory(*m_process.lock(), size))
+{
+}
+
+RemoteMemory::~RemoteMemory()
+{
+	try
+	{
+		static constexpr DWORD SIZE_WHEN_ALL = 0;
+		if (VirtualFreeEx(m_process.lock()->m_handle.get(), m_base_address, SIZE_WHEN_ALL, MEM_RELEASE) == FALSE)
+		{
+			TRACE(L"failed freeing remote memory")
+		}
+	}
+	catch (...)
+	{
+		TRACE(L"failed freeing remote memory")
+	}
+}
+
+void* RemoteMemory::allocate_remote_memory(Process& process, const uint32_t size)
+{
+	static constexpr LPVOID UNSPECIFIED_ADDRESS = nullptr;
+	static constexpr DWORD READ_WRITE = PAGE_READWRITE;
+	const LPVOID result = VirtualAllocEx(
+		process.m_handle.get(),
+		UNSPECIFIED_ADDRESS,
+		size,
+		MEM_RESERVE,
+		READ_WRITE
+	);
+	if (result == nullptr)
+	{
+		throw WinApiException(ErrorCode::FAILED_REMOTE_MEMORY_ALLOCATE);
+	}
+	return result;
+}
