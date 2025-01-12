@@ -46,13 +46,13 @@ void RemoteMemory::write(const std::vector<uint8_t>& data)
 void* RemoteMemory::allocate_remote_memory(Process& process, const uint32_t size)
 {
 	static constexpr LPVOID UNSPECIFIED_ADDRESS = nullptr;
-	static constexpr DWORD READ_WRITE = PAGE_READWRITE;
+	static constexpr DWORD READ_WRITE_EXECUTE = PAGE_EXECUTE_READWRITE;
 	const LPVOID result = VirtualAllocEx(
 		process.m_handle.get(),
 		UNSPECIFIED_ADDRESS,
 		size,
-		MEM_RESERVE,
-		READ_WRITE
+		MEM_RESERVE | MEM_COMMIT,
+		READ_WRITE_EXECUTE
 	);
 	if (result == nullptr)
 	{
