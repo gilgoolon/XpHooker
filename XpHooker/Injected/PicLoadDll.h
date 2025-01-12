@@ -8,6 +8,6 @@ typedef enum
 	LD_CRITICAL_FAILURE,
 } LoadDllStatusCode;
 
-__declspec(dllexport) LoadDllStatusCode __cdecl PIC__load_dll__START(const wchar_t* dll_path);
+__declspec(dllexport) LoadDllStatusCode __cdecl PIC__A__load_dll__START(const wchar_t* dll_path);
 
-__declspec(dllexport) void __cdecl PIC__load_dll__END(void);
+__declspec(dllexport) void __cdecl PIC__B__load_dll__END(void);
