@@ -2,10 +2,10 @@
 #include <cstdint>
 #include <memory>
 
-class Process;
-
 class RemoteMemory
 {
+	friend class Process;
+
 	explicit RemoteMemory(std::weak_ptr<Process> process, uint32_t size);
 
 public:

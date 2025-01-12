@@ -2,7 +2,6 @@
 
 #include "DynamicLibrary.hpp"
 #include "Exception.hpp"
-#include "LoadedPeModule.hpp"
 #include "Strings.hpp"
 #include "Trace.hpp"
 #include "WinApi.hpp"
@@ -14,14 +13,12 @@
 #pragma comment(lib, "ntdll.lib")
 
 Process::Process(const uint32_t pid):
-	m_handle(open_process(pid)),
-	m_loaded_modules()
+	m_handle(open_process(pid))
 {
 }
 
 Process::Process(const std::wstring& command_line):
-	m_handle(create_process(command_line)),
-	m_loaded_modules()
+	m_handle(create_process(command_line))
 {
 }
 
